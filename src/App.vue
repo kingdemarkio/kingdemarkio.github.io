@@ -19,18 +19,69 @@ import HeartRate from './icons/HeartRate.vue';
 import PiggyBank from './icons/PiggyBank.vue';
 import Download from './icons/Download.vue';
 
+import { ref, onMounted, nextTick } from 'vue';
+
+const isLoading = ref(true);
+
+onMounted(async () => {
+    await nextTick(); // Ensure videos are rendered
+    
+    const videos = Array.from(document.querySelectorAll('video'));
+    
+    let loadedCount = 0;
+    const total = videos.length;
+    
+    const checkDone = () => {
+        loadedCount++;
+        if (loadedCount === total) {
+            isLoading.value = false;
+        }
+    };
+    
+    // Listen for each video's 'canplaythrough' event
+    videos.forEach((video) => {
+        if (video.readyState >= 3) {
+            checkDone(); // Already ready
+        } else {
+            video.addEventListener('canplaythrough', checkDone, { once: true });
+        }
+    });
+    
+    // Fallback: hide after timeout just in case
+    setTimeout(() => {
+        if (isLoading.value) isLoading.value = false;
+    }, 8000); // max wait 8s
+});
+
+
 </script>
 
 <template>
+    <div :class="{'opacity-0 pointer-events-none': !isLoading}" class="fixed top-0 left-0 w-full h-screen bg-black z-[100] flex flex-col py-16 text-center">
+        <h1 class="text-4xl font-thin">Are You Ready?</h1>
+        <div class="flex-grow flex items-center justify-center">
+            <Mark class="w-64 h-64 text-white animate-spin-slow blur-3xl" />
+            <Mark class="w-64 h-64 text-white animate-spin-slow" />
+        </div>
+        <h1 class="text-4xl font-thin">I Can't Hear You!</h1>
+    </div>
     <div class="fixed top-0 left-0 w-full h-screen -z-50">
         <video src="/assets/videos/219971.mp4" class="w-full h-screen object-cover object-center" autoplay muted loop></video>
-    </div>    
+    </div>
+    <div class="fixed top-0 left-0 w-full h-screen z-40 opacity-10 pointer-events-none">
+        <video src="/assets/videos/film.mp4" class="w-full h-screen object-cover object-center" autoplay muted loop></video>
+    </div>
+    <div v-if="false" class="fixed z-50 bottom-0 left-0 w-full px-8 py-4 bg-white/60 backdrop-blur-3xl border-t border-white/20">
+        <audio controls src="/songs/the-bees-knees.wav" class="w-full bg-transparent"></audio>
+    </div>
     <main>
         <div class="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
             
             <section class="snap-start w-full h-screen flex items-center justify-center bg-main/40 text-white relative">
-                <header class="absolute top-0 left-0 w-full z-50 sm:flex items-center justify-between px-16 py-8 hidden">
+                <header class="absolute top-0 left-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
                     <Mark class="w-16 h-16 text-white animate-spin-slow" />
+                </header>
+                <header class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
                     <div class="text-center bg-black/40 text-white px-8 py-2 rounded-lg backdrop-blur-xl flex items-center gap-8">
                         <div>
                             <PiggyBank class="w-8 h-8" />
@@ -41,11 +92,11 @@ import Download from './icons/Download.vue';
                         </div>
                     </div>
                 </header>
-
+                
                 <aside class="absolute top-0 left-0 h-screen w-10 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
                     <p class="uppercase -rotate-90 text-nowrap text-xl font-light">The Apocalypse is Now. Stay Calm. Fear No Evil.</p>
                 </aside>
-
+                
                 <aside class="absolute top-0 right-0 h-screen w-10 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
                     <p class="uppercase rotate-90 text-nowrap text-xl font-light">In a world full of chaos and confusion. I bring hope.</p>
                 </aside>
@@ -71,172 +122,172 @@ import Download from './icons/Download.vue';
                 <Swiper class="w-full h-full" :modules="[Navigation, Pagination, Keyboard]" navigation pagination keyboard>
                     <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
                         <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <a href="/downloads/wav/the-clown-got-he-crown/the-bees-knees.wav" download="demarkio-the-bees-knees-2022-08-27.wav" class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/_5f604c0c-69bb-4759-b4c8-281fb7ccf5c5.jpeg" alt="Album Cover">
+                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                <img src="/covers/the-clown-got-he-crown.jpg" alt="Album Cover">
                                 <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
                                     <Download class="w-24 h-24" />
                                 </div>
-                            </a>
-                            <p class="text-2xl font-black pt-8">The Bees Knees</p>
+                            </div>
+                            <p class="text-2xl font-black pt-8">The Clown Got He Crown</p>
                             <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4 uppercase">The Clown Got He Crown</p>
+                            <p class="text-xs pt-4 uppercase">Single</p>
                         </div>
                     </SwiperSlide>
                     <template v-if="false">
-                    <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-01.png" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-01.png" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">This Nazi Loves Jews</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">Not Released</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">This Nazi Loves Jews</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">Not Released</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/album-01.jpg" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/album-01.jpg" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">Doomsday Scenario From Cornwall Ontario</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">Not Released</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">Doomsday Scenario From Cornwall Ontario</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">Not Released</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-02.png" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-02.png" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">Birthday Wish</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 28th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">Birthday Wish</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 28th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/album-02.png" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/album-02.png" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">Double Cross</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">Not Released</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">Double Cross</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">Not Released</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-03.png" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-03.png" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">Oh Shit! It's 6:66 O'clock on Judgement Day</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 29th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">Oh Shit! It's 6:66 O'clock on Judgement Day</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 29th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-04.jpg" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-04.jpg" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">Two Aliens Did Choose Cornwall</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 30th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">Two Aliens Did Choose Cornwall</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 30th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-04.jpg" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-04.jpg" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8">Who's The Real Slim Shady?</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 30th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8">Who's The Real Slim Shady?</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 30th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-04.jpg" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-04.jpg" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8 w-full max-w-xl">Unholy Mother of Satan! What a Horrific Beast.</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 30th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8 w-full max-w-xl">Unholy Mother of Satan! What a Horrific Beast.</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 30th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-04.jpg" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-04.jpg" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Rachel is the New Name for Infidel Moms</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 30th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Rachel is the New Name for Infidel Moms</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 30th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-04.jpg" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-04.jpg" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Rachel Gave Birth To Baby Jesus.<br>Then Convinced Him To Become The Devil.</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 30th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Rachel Gave Birth To Baby Jesus.<br>Then Convinced Him To Become The Devil.</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 30th, 2025</p>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide class="w-full h-full">
-                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
-                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/assets/covers/single-05.png" alt="Album Cover">
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                                    <Play class="w-24 h-24" v-if="false" />
-                                    <Pause class="w-24 h-24" v-if="true" />
+                        </SwiperSlide>
+                        <SwiperSlide class="w-full h-full">
+                            <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                                <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                    <img src="/assets/covers/single-05.png" alt="Album Cover">
+                                    <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                        <Play class="w-24 h-24" v-if="false" />
+                                        <Pause class="w-24 h-24" v-if="true" />
+                                    </div>
                                 </div>
+                                <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Condom Sex is Fake. Time for Plan B</p>
+                                <p class="text-xl font-light pt-2">DeMarkio</p>
+                                <p class="text-xs pt-4">August 30th, 2025</p>
                             </div>
-                            <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Condom Sex is Fake. Time for Plan B</p>
-                            <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 30th, 2025</p>
-                        </div>
-                    </SwiperSlide>
+                        </SwiperSlide>
                     </template>
                 </Swiper>
             </section>
@@ -268,9 +319,9 @@ import Download from './icons/Download.vue';
         </div>
         
         <section class="w-full min-h-screen flex flex-col py-16 drop-shadow-2xl bg-main/40">
-            <h3 class="text-6xl font-bold px-16 pb-8">Follow Me</h3>
-            <h4 class="text-4xl font-bold pb-8 text-center">Pretty Inappropriate <span class="font-light">To See</span></h4>
-            <div class="flex gap-16 items-center justify-center text-main px-16">
+            <h3 class="text-center sm:text-left text-6xl font-bold px-16 pb-8">Follow Me</h3>
+            <h4 class="text-2xl sm:text-4xl font-bold pb-8 text-center">Pretty Inappropriate <span class="font-light">Not To See</span></h4>
+            <div class="flex gap-16 flex-col lg:flex-row items-center justify-center text-main px-16">
                 <a href="https://instagram.com/kingdemarkio/" target="_blank" class="p-8 flex flex-col items-center gap-4 bg-white rounded-xl w-full hover:scale-110 hover:shadow-2xl hover:shadow-black transition-all duration-300">
                     <Instagram class="w-16 h-16" />
                     <div class="text-center">
@@ -293,8 +344,8 @@ import Download from './icons/Download.vue';
                     </div>
                 </a>
             </div>
-            <h4 class="text-4xl font-bold py-8 text-center">Adults Only <span class="font-light">Get To Know Me</span></h4>
-            <div class="flex gap-16 items-center justify-center text-main px-16">
+            <h4 class="text-2xl font-bold py-8 text-center">Adults Only <span class="font-light">Truly Get To Know Me</span></h4>
+            <div class="flex flex-col sm:flex-row gap-16 items-center justify-center text-main px-16">
                 <a href="https://www.snapchat.com/add/kingdemarkio" target="_blank" class="p-8 flex flex-col items-center gap-4 bg-white rounded-xl w-full hover:scale-110 hover:shadow-2xl hover:shadow-black transition-all duration-300">
                     <SnapChat class="w-16 h-16" />
                     <div class="text-center">
@@ -319,13 +370,16 @@ import Download from './icons/Download.vue';
                 <p class="text-center uppercase text-2xl">The Mission is Simple... Total Global Take Over.<br> Make it look easy because my life isn't simple.</p>
             </div>
             <h4 v-if="false" class="text-3xl font-medium">The Mission is Simple.<br>Take Over the World While Making it Look Easy.<br>I'm the Devil!<br>This Entire World Worships Me Already.<br>Because I'm Proud to be a 22 Year Old Virgin in the City with the Most Easy Pussy in All of History.<br>100% Not Gay, Just don't like my Girls Filthy.<br>I can wait till I get Married.</h4>
+            <div class="h-full flex items-center justify-center">
+                <h5 class="text-center text-4xl sm:text-6xl font-light"><b class="font-bold">Celebrity Status:</b> Highest</h5>
+            </div>
         </section>
         <footer class="p-16 drop-shadow-2xl">
             <p class="text-center">&copy; Copyright {{ new Date().getFullYear() }}, Jonas Markus Gudelis from Cornwall Ontario Canada.</p>
         </footer>
         <section v-if="false">
             <h4 class="text-3xl font-blmediumack">Follow Me</h4>
-            <div class="flex items-center gap-16 justify-center">
+            <div class="flex items-center gap-16 justify-center w-full overflow-scroll">
                 <div class="p-8 bg-white text-main rounded-xl">
                     <p class="text-3xl font-bold">Instagram</p>
                 </div>
