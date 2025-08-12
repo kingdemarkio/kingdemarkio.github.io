@@ -59,7 +59,7 @@ onMounted(async () => {
 
 <template>
     <div :class="{'opacity-0 pointer-events-none': !isLoading}" class="fixed top-0 left-0 w-full h-screen bg-black z-[100] flex flex-col items-center py-16 text-center">
-                <h1 class="text-4xl font-thin mb-32">Ouu, I don't Think You're Ready For This!</h1>
+                <h1 class="text-4xl font-thin mb-32"><span class="underline font-black">Ouu, I</span> <span class="text-2xl opacity-50">don't</span> <span class="font-black underline">Think You're Ready For This!</span></h1>
         <img src="./assets/smilie.svg" alt="Loading..." class="w-64 h-64 animate-spin">
     </div>
         <div class="fixed top-0 left-0 w-full h-screen -z-50">
