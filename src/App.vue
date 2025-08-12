@@ -259,7 +259,7 @@ import Mark from '@/components/Mark.vue';
             <h4 v-if="false" class="text-3xl font-medium">The Mission is Simple.<br>Take Over the World While Making it Look Easy.<br>I'm the Devil!<br>This Entire World Worships Me Already.<br>Because I'm Proud to be a 22 Year Old Virgin in the City with the Most Easy Pussy in All of History.<br>100% Not Gay, Just don't like my Girls Filthy.<br>I can wait till I get Married.</h4>
         </section>
         <footer class="p-16 drop-shadow-2xl">
-            <p class="text-center">&copy; Copyright 2025, Jonas Markus Gudelis from Cornwall Ontario Canada.</p>
+            <p class="text-center">&copy; Copyright {{ new Date().getFullYear() }}, Jonas Markus Gudelis from Cornwall Ontario Canada.</p>
         </footer>
         <section v-if="false">
             <h4 class="text-3xl font-blmediumack">Follow Me</h4>
