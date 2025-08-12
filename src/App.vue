@@ -14,6 +14,10 @@ import TikTok from '@/icons/TikTok.vue';
 import Play from '@/icons/Play.vue';
 import Pause from '@/icons/Pause.vue';
 import Mark from '@/components/Mark.vue';
+import YingYang from './components/YingYang.vue';
+import HeartRate from './icons/HeartRate.vue';
+import PiggyBank from './icons/PiggyBank.vue';
+import Download from './icons/Download.vue';
 
 </script>
 
@@ -25,35 +29,60 @@ import Mark from '@/components/Mark.vue';
         <div class="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
             
             <section class="snap-start w-full h-screen flex items-center justify-center bg-main/40 text-white relative">
-                <header class="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-8 py-4">
-                    <Mark class="w-16 h-16 text-white" />
-                    <div class="text-center bg-black/40 text-white px-8 py-2 rounded-lg backdrop-blur-xl">
-                        <p class="text-xs font-light">E-Transfer to Donate (Canada Only)</p>
-                        <p class="underline text-lg">kingdemarkio@gmail.com</p>
+                <header class="absolute top-0 left-0 w-full z-50 sm:flex items-center justify-between px-16 py-8 hidden">
+                    <Mark class="w-16 h-16 text-white animate-spin-slow" />
+                    <div class="text-center bg-black/40 text-white px-8 py-2 rounded-lg backdrop-blur-xl flex items-center gap-8">
+                        <div>
+                            <PiggyBank class="w-8 h-8" />
+                        </div>
+                        <div>
+                            <p class="text-xs font-light">Interac e-Transfer Donation (Canada)</p>
+                            <p class="underline text-lg">kingdemarkio@gmail.com</p>
+                        </div>
                     </div>
                 </header>
+
+                <aside class="absolute top-0 left-0 h-screen w-10 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
+                    <p class="uppercase -rotate-90 text-nowrap text-xl font-light">The Apocalypse is Now. Stay Calm. Fear No Evil.</p>
+                </aside>
+
+                <aside class="absolute top-0 right-0 h-screen w-10 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
+                    <p class="uppercase rotate-90 text-nowrap text-xl font-light">In a world full of chaos and confusion. I bring hope.</p>
+                </aside>
                 
                 <div class="p-16 flex flex-col items-center gap-8 drop-shadow-2xl">
                     <div class="perspective w-64 h-64 group">
                         <Logo class="w-full h-full text-main bg-white p-8 rounded-full transition-all duration-700 transform-style preserve-3d group-hover:scale-150 group-hover:shadow-2xl group-hover:shadow-black group-hover:rotate-y-180" />
                     </div>
-                    <div class="flex flex-col items-center gap-4">
+                    <div class="flex flex-col items-center gap-4 text-center">
                         <h1 class="text-6xl font-black">King DeMarkio</h1>
                         <h2 class="text-3xl font-light">From Cornwall Ontario</h2>
                     </div>
                     <div>
-                        <p class="text-4xl font-thin">Hello, world! Have no fear, your God is here.</p>
+                        <p class="text-2xl sm:text-4xl font-thin text-center">Hello, world! Have no fear, your God is here.</p>
                     </div>
-                    <div v-if="false" class="text-center">
-                        <p>Hello, world! It's me.</p>
-                        <p>Who is DeMarkio? Born Jonas the III Gudelis (named Markus) is just your average Rapper, Social Media Influencer, Software Developer, from a small city where nobody cares.</p>
-                        <p>I also have an OnlyFans for all the girls who know there's nothing more brave than that. I'm a hero, but all these losers with a small city mentallity see me as villain.</p>
+                    <div>
+                        <p class="uppercase text-center text-sm sm:text-base">It's Always 4:20 Around Here. Blazing The Good Stuff Daily.<br>All they do is wine and complain. I don't like lame.</p>
                     </div>
                 </div>
             </section>
             <section class="snap-start w-full h-screen flex flex-col py-16 bg-black/40 backdrop-blur-3xl text-white section-fade-edges">
                 <h3 class="text-6xl font-bold px-16 pb-8">Listen Carefully</h3>
                 <Swiper class="w-full h-full" :modules="[Navigation, Pagination, Keyboard]" navigation pagination keyboard>
+                    <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
+                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                            <a href="/downloads/wav/the-clown-got-he-crown/the-bees-knees.wav" download="demarkio-the-bees-knees-2022-08-27.wav" class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                <img src="/assets/covers/_5f604c0c-69bb-4759-b4c8-281fb7ccf5c5.jpeg" alt="Album Cover">
+                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                    <Download class="w-24 h-24" />
+                                </div>
+                            </a>
+                            <p class="text-2xl font-black pt-8">The Bees Knees</p>
+                            <p class="text-xl font-light pt-2">DeMarkio</p>
+                            <p class="text-xs pt-4 uppercase">The Clown Got He Crown</p>
+                        </div>
+                    </SwiperSlide>
+                    <template v-if="false">
                     <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
                         <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
                             <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
@@ -65,7 +94,7 @@ import Mark from '@/components/Mark.vue';
                             </div>
                             <p class="text-2xl font-black pt-8">This Nazi Loves Jews</p>
                             <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 11th, 2025</p>
+                            <p class="text-xs pt-4">Not Released</p>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide class="w-full h-full">
@@ -79,7 +108,7 @@ import Mark from '@/components/Mark.vue';
                             </div>
                             <p class="text-2xl font-black pt-8">Doomsday Scenario From Cornwall Ontario</p>
                             <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4">August 27th, 2025</p>
+                            <p class="text-xs pt-4">Not Released</p>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide class="w-full h-full">
@@ -94,6 +123,20 @@ import Mark from '@/components/Mark.vue';
                             <p class="text-2xl font-black pt-8">Birthday Wish</p>
                             <p class="text-xl font-light pt-2">DeMarkio</p>
                             <p class="text-xs pt-4">August 28th, 2025</p>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide class="w-full h-full">
+                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                <img src="/assets/covers/album-02.png" alt="Album Cover">
+                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                    <Play class="w-24 h-24" v-if="false" />
+                                    <Pause class="w-24 h-24" v-if="true" />
+                                </div>
+                            </div>
+                            <p class="text-2xl font-black pt-8">Double Cross</p>
+                            <p class="text-xl font-light pt-2">DeMarkio</p>
+                            <p class="text-xs pt-4">Not Released</p>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide class="w-full h-full">
@@ -180,28 +223,47 @@ import Mark from '@/components/Mark.vue';
                             <p class="text-xs pt-4">August 30th, 2025</p>
                         </div>
                     </SwiperSlide>
+                    <SwiperSlide class="w-full h-full">
+                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                            <div class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                <img src="/assets/covers/single-05.png" alt="Album Cover">
+                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                    <Play class="w-24 h-24" v-if="false" />
+                                    <Pause class="w-24 h-24" v-if="true" />
+                                </div>
+                            </div>
+                            <p class="text-2xl font-black pt-8 w-full max-w-xl text-center">Condom Sex is Fake. Time for Plan B</p>
+                            <p class="text-xl font-light pt-2">DeMarkio</p>
+                            <p class="text-xs pt-4">August 30th, 2025</p>
+                        </div>
+                    </SwiperSlide>
+                    </template>
                 </Swiper>
             </section>
             <section class="snap-start w-full h-screen relative">
                 <div class="absolute top-0 left-0 w-full h-full -z-40 bg-black">
                     <video src="/assets/videos/223460.mp4" class="w-full h-full object-cover" autoplay muted loop></video>
                 </div>
-                <div class="w-full h-full relative">
+                <div class="absolute top-0 left-0 -z-30 w-full h-screen flex justify-between brightness-50 blur-xs">
+                    <img src="/assets/style/left-side-money.png" alt="" class="h-full absolute left-0 top-0">
+                    <img src="/assets/style/right-side-money.png" alt="" class="h-full absolute right-0 top-0">
+                </div>
+                <div class="w-full h-full relative drop-shadow-2xl drop-shadow-black">
                     <div class="absolute top-0 left-0 p-16 text-left">
-                        <h1 class="text-6xl font-black">Zombie Boy</h1>
-                        <h2 class="text-3xl font-black">Chasing That Good Brain.</h2>
+                        <h1 class="text-4xl sm:text-6xl font-black">Zombie Boy</h1>
+                        <h2 class="text-xl sm:text-3xl font-black">Chasing That Good Brain.</h2>
                         
                     </div>
                     <div class="absolute bottom-0 right-0 p-16 text-right">
-                        <h1 class="text-6xl font-black">Clinically Insane</h1>
-                        <h2 class="text-3xl font-black">With Absolutely No Game.</h2>
+                        <h1 class="text-3xl sm:text-6xl font-black">Clinically Insane</h1>
+                        <h2 class="text-xl sm:text-3xl font-black">With Absolutely No Game.</h2>
                     </div>
                 </div>
             </section>
-            <section class="snap-start w-full h-screen flex flex-col items-center justify-center gap-16">
-                <h1 class="text-6xl font-black">Dare To Do Drugs?</h1>
+            <section class="snap-start w-full h-screen flex flex-col items-center justify-center gap-16 p-16">
+                <h1 class="text-4xl text-center sm:text-6xl font-black">Dare To Do Drugs?</h1>
                 <video src="/assets/videos/fried.mp4" muted autoplay loop class="rounded-4xl shadow-2xl"></video>
-                <h2 class="text-4xl font-black">Doesn't Getting Fried Look Like Fun?</h2>
+                <h2 class="text-2xl text-center sm:text-4xl font-black">Doesn't Getting Fried Look Like Fun?</h2>
             </section>
         </div>
         
@@ -249,9 +311,9 @@ import Mark from '@/components/Mark.vue';
                 </a>
             </div>
         </section>
-        <section class="w-full h-screen flex flex-col py-16 drop-shadow-2xl bg-main/40">
-            <h3 class="text-6xl font-bold px-16">The Mission</h3>
-            <h4 class="text-8xl font-light text-center py-16">Rapper - Influencer - Developer</h4>
+        <section class="w-full h-screen flex flex-col py-16 drop-shadow-2xl bg-main/40 px-8">
+            <h3 class="text-4xl text-center sm:text-6xl font-bold px-16">The Mission</h3>
+            <h4 class="text-2xl sm:text-8xl font-light text-center py-16">Rapper - Influencer - Developer</h4>
             <h5 class="text-center uppercase">And Everything Else. Just Your Average Joe Super Star. Young Boss.</h5>
             <div class="pt-16">
                 <p class="text-center uppercase text-2xl">The Mission is Simple... Total Global Take Over.<br> Make it look easy because my life isn't simple.</p>
