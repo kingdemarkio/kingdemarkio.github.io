@@ -4,6 +4,10 @@
     --color-main: #de0000;
 }
 
+button, a {
+    cursor: url('/cursors/middle-finger.cur'), auto !important;
+}
+
 @layer utilities {
     .section-fade-edges::before,
     .section-fade-edges::after {

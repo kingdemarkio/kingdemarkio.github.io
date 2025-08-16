@@ -23,6 +23,49 @@ import { ref, onMounted, nextTick } from 'vue';
 import Trippy from './components/Trippy.vue';
 import SoundCloud from './icons/SoundCloud.vue';
 
+const snapContainer = ref(null);
+const snapSections = ['Intro', 'Listen', 'Zombie Boy'];
+
+let snapEnabled = true;
+let lastScrollTop = 0;
+
+onMounted(() => {
+  const container = snapContainer.value;
+
+  container.addEventListener('scroll', () => {
+    const scrollTop = container.scrollTop;
+    const goingDown = scrollTop > lastScrollTop;
+    lastScrollTop = scrollTop;
+
+    const maxScroll = container.scrollHeight - container.clientHeight;
+
+    // reached bottom of snap
+    if (goingDown && scrollTop >= maxScroll - 1 && snapEnabled) {
+      disableSnap();
+    }
+
+    // going up from normal area
+    if (!goingDown && window.scrollY === 0 && !snapEnabled) {
+      enableSnap(true);
+    }
+  });
+});
+
+function disableSnap() {
+  snapEnabled = false;
+  snapContainer.value.classList.remove('snap-enabled');
+  document.body.style.overflow = 'auto';
+}
+
+function enableSnap(jumpTop = false) {
+  snapEnabled = true;
+  snapContainer.value.classList.add('snap-enabled');
+  document.body.style.overflow = 'hidden';
+  if (jumpTop) {
+    snapContainer.value.scrollTo({ top: 0, behavior: 'instant' });
+  }
+}
+
 const isLoading = ref(true);
 
 onMounted(async () => {
@@ -63,6 +106,9 @@ onMounted(async () => {
         <h1 class="text-4xl font-thin mb-32"><span class="underline font-black">Ouu, I</span> <span class="text-2xl opacity-50">don't</span> <span class="font-black underline">Think You're Ready For This!</span></h1>
         <img src="./assets/smilie.svg" alt="Loading..." class="w-64 h-64 animate-spin">
     </div>
+    <div class="z-[101] fixed top-0 left-0 w-full h-screen flex items-center justify-end pointer-events-none p-32">
+        <img src="/assets/pictures/bullet-hole.png" alt="" class="w-64 h-64">
+    </div>
     <div class="fixed top-0 left-0 w-full h-screen -z-50">
         <video src="/assets/videos/219971.mp4" class="w-full h-screen object-cover object-center" autoplay muted loop></video>
     </div>
@@ -73,9 +119,9 @@ onMounted(async () => {
         <audio controls src="/songs/the-bees-knees.wav" class="w-full bg-transparent"></audio>
     </div>
     <main>
-        <div class="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
+        <div ref="snapContainer" class="snap-container snap-enabled snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
             
-            <section class="snap-start w-full h-screen flex items-center justify-center bg-main/40 text-white relative">
+            <section class="snap-section snap-start w-full h-screen flex items-center justify-center bg-main/40 text-white relative">
                 <header class="absolute top-0 left-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
                     <Mark class="w-16 h-16 text-white animate-spin-slow" />
                 </header>
@@ -91,11 +137,15 @@ onMounted(async () => {
                     </div>
                 </header>
                 
-                <header class="fixed bottom-0 left-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
-                    <a href="https://soundcloud.com/kingdemarkio" class="block p-8 rounded-full bg-white/20 hover:bg-white/95 border border-white/20 text-white backdrop-blur-3xl hover:text-main drop-shadow-2xl hover:scale-110 hover:drop-shadow-black transition-all duration-300">
-                        <SoundCloud class="w-16 h-16" />
+                <footer class="fixed bottom-0 left-0 z-50 items-center justify-between px-16 py-8 flex">
+                    <a href="https://soundcloud.com/kingdemarkio" class="flex group items-center gap-8 px-8 py-2 rounded-full bg-white/20 hover:bg-white/95 border border-white/20 text-white backdrop-blur-3xl hover:text-main drop-shadow-2xl hover:scale-110 hover:drop-shadow-black transition-all duration-300">
+                        <SoundCloud class="w-16 h-16 drop-shadow" />
+                        <div class="drop-shadow">
+                            <p class="text-xl font-bold">SoundCloud</p>
+                            <p class="text-sm">@kingdemarkio</p>
+                        </div>
                     </a>
-                </header>
+                </footer>
                 
                 <aside class="absolute top-0 left-0 h-screen w-10 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
                     <p class="uppercase -rotate-90 text-nowrap text-xl font-light">The Apocalypse is Now. Stay Calm. Fear No Evil.</p>
@@ -121,21 +171,47 @@ onMounted(async () => {
                     </div>
                 </div>
             </section>
-            <section class="snap-start w-full h-screen flex flex-col py-16 bg-black/40 backdrop-blur-3xl text-white section-fade-edges">
+            <section class="snap-section snap-start w-full h-screen flex flex-col py-16 bg-black/40 backdrop-blur-3xl text-white section-fade-edges">
                 <h3 class="text-6xl font-bold px-16 pb-8">Listen Carefully</h3>
                 <Swiper class="w-full h-full" :modules="[Navigation, Pagination, Keyboard]" navigation pagination keyboard>
                     
                     <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
                         <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
                             <a href="https://soundcloud.com/kingdemarkio" target="_blank" class="w-64 h-64 rounded-lg overflow-hidden relative group">
-                                <img src="/covers/bad-condom.png" alt='"Fake Fucks" Cover Art'>
-                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                <img src="/covers/01-fake-fucks.png" alt='"Fake Fucks" Cover Art'>
+                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
                                     <SoundCloud class="w-24 h-24 drop-shadow drop-shadow-black" />
                                 </div>
                             </a>
                             <p class="text-2xl font-black pt-8">Fake Fucks</p>
                             <p class="text-xl font-light pt-2">DeMarkio</p>
-                            <p class="text-xs pt-4 uppercase">Single &bull; 2025-08-15</p>
+                            <p class="text-xs pt-4 uppercase">Single &bull; 2025-08-16</p>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
+                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                            <a href="https://soundcloud.com/kingdemarkio" target="_blank" class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                <img src="/covers/02-doomsday.jpg" alt='"Fake Fucks" Cover Art'>
+                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                    <SoundCloud class="w-24 h-24 drop-shadow drop-shadow-black" />
+                                </div>
+                            </a>
+                            <p class="text-2xl font-black pt-8">Doomsday Scenario From Cornwall Ontario</p>
+                            <p class="text-xl font-light pt-2">DeMarkio</p>
+                            <p class="text-xs pt-4 uppercase">Album &bull; 2025-08-27</p>
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide class="w-full h-full cursor-grab active:cursor-grabbing">
+                        <div class="w-full h-full flex flex-col items-center justify-center drop-shadow-2xl">
+                            <a href="https://soundcloud.com/kingdemarkio" target="_blank" class="w-64 h-64 rounded-lg overflow-hidden relative group">
+                                <img src="/covers/02-doomsday.jpg" alt='"Fake Fucks" Cover Art'>
+                                <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
+                                    <SoundCloud class="w-24 h-24 drop-shadow drop-shadow-black" />
+                                </div>
+                            </a>
+                            <p class="text-2xl font-black pt-8">Doomsday Scenario From Cornwall Ontario</p>
+                            <p class="text-xl font-light pt-2">DeMarkio</p>
+                            <p class="text-xs pt-4 uppercase">Album &bull; 2025-08-27</p>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide v-if="false" class="w-full h-full cursor-grab active:cursor-grabbing">
@@ -309,7 +385,7 @@ onMounted(async () => {
                     </template>
                 </Swiper>
             </section>
-            <section class="snap-start w-full h-screen relative">
+            <section class="snap-section snap-start w-full h-screen relative">
                 <div class="absolute top-0 left-0 w-full h-full -z-40 bg-black">
                     <video src="/assets/videos/223460.mp4" class="w-full h-full object-cover" autoplay muted loop></video>
                 </div>
@@ -544,5 +620,14 @@ onMounted(async () => {
     transform: rotateY(180deg);
 }
 
+
+.snap-container.snap-enabled {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.snap-container.snap-enabled > .snap-section {
+  scroll-snap-align: start;
+}
 
 </style>
