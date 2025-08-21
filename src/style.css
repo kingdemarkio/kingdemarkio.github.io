@@ -4,6 +4,23 @@
     --color-main: #de0000;
 }
 
+/* Make navigation arrows white */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+}
+
+/* Make pagination bullets white */
+.swiper-pagination-bullet {
+    background-color: white;
+}
+
+/* Optional: Make the active bullet slightly larger or different */
+.swiper-pagination-bullet-active {
+    background-color: white;
+    opacity: 1;
+}
+
 button, a {
     cursor: url('/cursors/middle-finger.cur'), auto !important;
 }
