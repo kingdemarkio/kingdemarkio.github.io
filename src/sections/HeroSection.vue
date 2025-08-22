@@ -70,7 +70,7 @@ onBeforeUnmount(() => {
         <Swiper
         ref="swiperRef"
         direction="vertical"
-        :mousewheel="{ forceToAxis: true, releaseOnEdges: false, sensitivity: 0.5 }"
+        :mousewheel="{ forceToAxis: true, releaseOnEdges: true, sensitivity: 0.1 }"
         :modules="[Mousewheel]"
         class="h-full w-full"
         @slideChange="handleSlideChange"
