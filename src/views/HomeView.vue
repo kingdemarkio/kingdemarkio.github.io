@@ -98,7 +98,7 @@ const showAdultLinks = ref(true);
         leave-from-class="translate-x-0 opacity-100"
         leave-to-class="translate-x-full opacity-0"
     >
-    <header v-if="!isLoading" class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-4 hidden">
+    <header v-if="!isLoading" class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-4 hidden animate-sway-random">
         <div class="flex items-center bg-[#fdb913] text-[#231f20] rounded-lg px-4 py-1 gap-8 shadow-2xl shadow-black/60">
             <InteracEmblemTwo class="w-14 h-14" />
             <div class="text-left">
