@@ -2,7 +2,7 @@
 import Logo from '@/components/Logo.vue';
 import Mark from '@/components/Mark.vue';
 import PiggyBank from '@/icons/PiggyBank.vue';
-import SoundCloud from '@/icons/SoundCloud.vue';
+import SoundCloudIcon from '@/icons/SoundCloudIcon.vue';
 import InteracLogo from '@/components/InteracLogo.vue';
 </script>
 
@@ -17,7 +17,7 @@ import InteracLogo from '@/components/InteracLogo.vue';
         
         <footer class="fixed bottom-0 left-0 z-50 w-full items-center sm:justify-start sm:px-16 py-8 flex justify-center">
             <a href="https://soundcloud.com/kingdemarkio" class="flex group items-center gap-4 sm:gap-8 px-8 py-2 rounded-full bg-white/20 hover:bg-white/95 border border-white/20 text-white backdrop-blur-3xl hover:text-main drop-shadow-2xl hover:scale-110 hover:drop-shadow-black transition-all duration-300">
-                <SoundCloud class="w-8 h-8 sm:w-16 sm:h-16 drop-shadow" />
+                <SoundCloudIcon class="w-8 h-8 sm:w-16 sm:h-16 drop-shadow" />
                 <div class="drop-shadow">
                     <p class="sm:block hidden text-xl font-bold">SoundCloud</p>
                     <p class="text-sm">@kingdemarkio</p>

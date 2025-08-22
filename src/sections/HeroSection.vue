@@ -10,7 +10,7 @@ import DareFriedSlide from '@/slides/DareFriedSlide.vue'
 import HomeSection from '@/sections/HomeSection.vue'
 import MySoulIsHersSlide from '@/slides/MySoulIsHersSlide.vue'
 import OhYouCantRapSlide from '@/slides/OhYouCantRapSlide.vue'
-import RandomSlideGroup from '@/components/RandomSlideGroup.vue'
+import SelectRandomChild from '@/components/SelectRandomChild.vue'
 
 const swiperRef = ref(null)
 let releaseTimeout = null

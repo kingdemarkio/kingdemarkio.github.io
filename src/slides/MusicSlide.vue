@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/keyboard';
-import SoundCloud from '@/icons/SoundCloud.vue';
+import SoundCloudIcon from '@/icons/SoundCloudIcon.vue';
 </script>
 
 <template>
@@ -18,7 +18,7 @@ import SoundCloud from '@/icons/SoundCloud.vue';
                     <a href="https://soundcloud.com/kingdemarkio/super-bad-freestyle" target="_blank" class="w-64 h-64 rounded-lg overflow-hidden relative group">
                         <img src="/covers/super-bad-freestyle.png" alt="Cover Art">
                         <div class="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none top-0 left-0 w-full h-full bg-black/60 text-white flex items-center justify-center">
-                            <SoundCloud class="w-24 h-24 drop-shadow" />
+                            <SoundCloudIcon class="w-24 h-24 drop-shadow" />
                         </div>
                     </a>
                     <p class="text-2xl font-black pt-8 px-16 text-center max-w-lg min-h-24 uppercase">Super Bad Freestyle</p>
