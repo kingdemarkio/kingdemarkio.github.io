@@ -101,7 +101,7 @@ const showAdultLinks = ref(true);
     <header v-if="!isLoading" class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-4 hidden">
         <div class="flex items-center bg-[#fdb913] text-[#231f20] rounded-lg px-4 py-1 gap-8 shadow-2xl shadow-black/60">
             <InteracEmblemTwo class="w-14 h-14" />
-            <div class="text-center">
+            <div class="text-left">
                 <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
                 <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-40 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
             </div>

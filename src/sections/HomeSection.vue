@@ -12,20 +12,6 @@ import InteracLogo from '@/components/InteracLogo.vue';
             <div class="hover:opacity-40 transition-opacity duration-300">
                 <Mark class="w-16 h-16 text-white animate-spin-slow" />
             </div>
-            <template>
-                <RouterLink to="/" class="hover:opacity-40 transition-opacity duration-300">
-                    <p class="text-xl border-b-2 border-white/0 hover:border-white/60 pb-2 transition-all duration-300 !border-white">Home</p>
-                </RouterLink>
-                <RouterLink to="/" class="hover:opacity-40 transition-opacity duration-300">
-                    <p class="text-xl border-b-2 border-white/0 hover:border-white/60 pb-2 transition-all duration-300">Music</p>
-                </RouterLink>
-                <RouterLink to="/store" class="hover:opacity-40 transition-opacity duration-300">
-                    <p class="text-xl border-b-2 border-white/0 hover:border-white/60 pb-2 transition-all duration-300">Merch</p>
-                </RouterLink>
-                <RouterLink to="/" class="hover:opacity-40 transition-opacity duration-300">
-                    <p class="text-xl border-b-2 border-white/0 hover:border-white/60 pb-2 transition-all duration-300">About</p>
-                </RouterLink>
-            </template>
         </header>
         
         
