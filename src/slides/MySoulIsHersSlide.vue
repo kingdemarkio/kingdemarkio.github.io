@@ -10,12 +10,12 @@
         <div class="w-full h-full relative drop-shadow-2xl drop-shadow-black">
             <div class="absolute top-0 left-0 p-16 text-left">
                 <h1 class="text-4xl sm:text-6xl font-black">My Soul</h1>
-                <h2 class="text-xl sm:text-3xl font-black">Everything Creation I Build</h2>
+                <h2 class="text-xl sm:text-3xl font-black">Every Creation I Build</h2>
                 
             </div>
             <div class="absolute bottom-16 sm:bottom-0 right-0 p-16 text-right">
                 <h1 class="text-3xl sm:text-6xl font-black">All Hers</h1>
-                <h2 class="text-xl sm:text-3xl font-black">Just Trying To Impress.</h2>
+                <h2 class="text-xl sm:text-3xl font-black">So Hard To Impress.</h2>
             </div>
         </div>
     </section>

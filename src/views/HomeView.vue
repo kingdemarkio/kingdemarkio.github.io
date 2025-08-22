@@ -79,16 +79,6 @@ const showAdultLinks = ref(true);
         <img src="/assets/pictures/bullet-hole.png" alt="" class="w-48 h-48 sm:w-64 sm:h-64">
     </div>
     
-    <header v-if="false" class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-4 hidden">
-        <div class="flex items-center bg-black/40 rounded-lg backdrop-blur-xl pl-0.5">
-            <InteracLogo class="w-14 h-14" />
-            <div class="text-center text-white px-8 py-2">
-                <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
-                <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
-            </div>
-        </div>
-    </header>
-    
     <Transition
         enter-active-class="transform transition ease-out duration-300 delay-300"
         enter-from-class="translate-x-full opacity-0"
@@ -125,16 +115,6 @@ const showAdultLinks = ref(true);
     <LinksSection />
     
     <AboutSection ref="aboutSectionRef" />
-    
-    <section v-if="false" class="block sm:hidden">
-        <div class="flex items-center gap-8 bg-black/40 border-y border-black backdrop-blur-xl px-4 py-2">
-            <InteracLogo class="w-14 h-14" />
-            <div class="text-center text-white py-2">
-                <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
-                <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
-            </div>
-        </div>
-    </section>
     
     <section class="block sm:hidden">
         <div class="flex items-center bg-[#fdb913] text-[#231f20] px-4 py-1 gap-8 shadow-2xl shadow-black/60">

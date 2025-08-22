@@ -11,6 +11,7 @@ import HomeSection from '@/sections/HomeSection.vue'
 import MySoulIsHersSlide from '@/slides/MySoulIsHersSlide.vue'
 import OhYouCantRapSlide from '@/slides/OhYouCantRapSlide.vue'
 import SelectRandomChild from '@/components/SelectRandomChild.vue'
+import GotTheMarkSlide from '../slides/GotTheMarkSlide.vue'
 
 const swiperRef = ref(null)
 let releaseTimeout = null
@@ -82,10 +83,17 @@ onBeforeUnmount(() => {
             <MusicSlide />
         </SwiperSlide>
         <SwiperSlide>
-            <ZombieBoyOneSlide />
+            <SelectRandomChild>
+                <ZombieBoyOneSlide />
+                <MySoulIsHersSlide />
+            </SelectRandomChild>
         </SwiperSlide>
         <SwiperSlide>
-            <DareFriedSlide />
+            <SelectRandomChild>
+                <DareFriedSlide />
+                <OhYouCantRapSlide />
+                <GotTheMarkSlide />
+            </SelectRandomChild>
         </SwiperSlide>
     </Swiper>
 </div>

@@ -48,7 +48,7 @@ const showAdultLinks = ref(true);
                 </a>
             </div>
             <template v-if="showAdultLinks">
-                <h4 class="text-2xl font-bold py-8 text-center">Adults Only <span class="font-light">Truly Get To Know Me</span></h4>
+                <h4 class="text-2xl font-bold py-8 text-center">Adults Only (18+) <span class="font-light">Truly Get To Know Me</span></h4>
                 <div class="flex flex-col sm:flex-row gap-16 items-center justify-center text-main px-16">
                     <a href="https://www.snapchat.com/add/kingdemarkio" target="_blank" class="p-8 flex flex-col items-center gap-4 bg-white rounded-xl w-full hover:scale-110 hover:shadow-2xl hover:shadow-black transition-all duration-300">
                         <SnapChatIcon class="w-16 h-16" />
