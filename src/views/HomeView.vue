@@ -1,9 +1,9 @@
 <script setup>
 
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, watch } from 'vue';
 import SoundCloudIcon from '@/icons/SoundCloudIcon.vue';
 import Smilie from '@/components/Smilie.vue';
-import { useIntersectionObserver } from '@vueuse/core';
+import { useIntersectionObserver, useScrollLock } from '@vueuse/core';
 import HeroSection from '@/sections/HeroSection.vue';
 import HomeSection from '@/sections/HomeSection.vue';
 import LinksSection from '@/sections/LinksSection.vue';
@@ -12,6 +12,7 @@ import InteracLogo from '@/components/InteracLogo.vue';
 import InteracEmblem from '@/components/InteracEmblem.vue';
 import InteracEmblemTwo from '@/components/InteracEmblemTwo.vue';
 
+const isLocked = useScrollLock(document.body);
 const isLoading = ref(true);
 
 onMounted(async () => {
@@ -45,6 +46,11 @@ onMounted(async () => {
 });
 
 
+watch(isLoading, (value) => {
+  isLocked.value = value
+})
+
+
 const introDone = ref(false);
 
 const showHero = ref(true)
@@ -66,6 +72,7 @@ aboutSectionRef,
 )
 
 const showAdultLinks = ref(true);
+
 
 </script>
 
