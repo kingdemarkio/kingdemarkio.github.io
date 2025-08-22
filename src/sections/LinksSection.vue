@@ -44,14 +44,14 @@ const showAdultLinks = ref(true);
                     <a href="https://www.snapchat.com/add/kingdemarkio" target="_blank" class="p-8 flex flex-col items-center gap-4 bg-white rounded-xl w-full hover:scale-110 hover:shadow-2xl hover:shadow-black transition-all duration-300">
                         <SnapChat class="w-16 h-16" />
                         <div class="text-center">
-                            <p class="text-2xl font-bold">SnapChat <span class="font-light"><br class="sm:hidden" />(Invite Only)</span></p>
+                            <p class="text-2xl font-bold">SnapChat <span class="font-light"><br class="lg:hidden" />(Invite Only)</span></p>
                             <p>@kingdemarkio</p>
                         </div>
                     </a>
                     <a href="https://onlyfans.com/kingdemarkio" target="_blank" class="p-8 flex flex-col items-center gap-4 bg-white rounded-xl w-full hover:scale-110 hover:shadow-2xl hover:shadow-black transition-all duration-300">
                         <OnlyFans class="w-16 h-16" />
                         <div class="text-center">
-                            <p class="text-2xl font-bold">OnlyFans <span class="font-light"><br class="sm:hidden" />(Girls Only)</span></p>
+                            <p class="text-2xl font-bold">OnlyFans <span class="font-light"><br class="lg:hidden" />(Girls Only)</span></p>
                             <p>@kingdemarkio</p>
                         </div>
                     </a>

@@ -3,6 +3,7 @@ import Logo from '@/components/Logo.vue';
 import Mark from '@/components/Mark.vue';
 import PiggyBank from '@/icons/PiggyBank.vue';
 import SoundCloud from '@/icons/SoundCloud.vue';
+import InteracLogo from '../components/InteracLogo.vue';
 </script>
 
 <template>
@@ -27,13 +28,11 @@ import SoundCloud from '@/icons/SoundCloud.vue';
             </template>
         </header>
         <header class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
-            <div class="text-center bg-black/40 text-white px-8 py-2 rounded-lg backdrop-blur-xl flex items-center gap-8">
-                <div>
-                    <PiggyBank class="w-8 h-8" />
-                </div>
-                <div>
-                    <p class="text-xs font-light">Interac e-Transfer Donation (Canada)</p>
-                    <p class="underline text-lg">kingdemarkio@gmail.com</p>
+            <div class="flex items-center bg-black/40 rounded-lg backdrop-blur-xl">
+                <InteracLogo class="w-14 h-14" />
+                <div class="text-center text-white px-8 py-2">
+                    <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
+                    <p class="underline text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
                 </div>
             </div>
         </header>
