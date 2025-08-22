@@ -28,11 +28,11 @@ import InteracLogo from '../components/InteracLogo.vue';
             </template>
         </header>
         <header class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
-            <div class="flex items-center bg-black/40 rounded-lg backdrop-blur-xl">
+            <div class="flex items-center bg-black/40 rounded-lg backdrop-blur-xl pl-0.5">
                 <InteracLogo class="w-14 h-14" />
                 <div class="text-center text-white px-8 py-2">
                     <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
-                    <p class="underline text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
+                    <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
                 </div>
             </div>
         </header>
