@@ -8,6 +8,7 @@ import HeroSection from '@/sections/HeroSection.vue';
 import HomeSection from '@/sections/HomeSection.vue';
 import LinksSection from '@/sections/LinksSection.vue';
 import AboutSection from '@/sections/AboutSection.vue';
+import InteracLogo from '@/components/InteracLogo.vue';
 
 
 const isLoading = ref(true);
@@ -94,6 +95,16 @@ const showAdultLinks = ref(true);
         <LinksSection />
         
         <AboutSection ref="aboutSectionRef" />
+
+        <section class="block sm:hidden">
+            <div class="flex items-center gap-8 bg-black/40 border-y border-black backdrop-blur-xl px-4 py-2">
+                <InteracLogo class="w-14 h-14" />
+                <div class="text-center text-white py-2">
+                    <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
+                    <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
+                </div>
+            </div>
+        </section>
 
         <footer class="p-16 drop-shadow-2xl sm:pb-16 pb-64">
             <p class="text-center">&copy; Copyright {{ new Date().getFullYear() }}, Jonas Markus Gudelis from Cornwall Ontario Canada.</p>

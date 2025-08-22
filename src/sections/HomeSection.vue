@@ -3,15 +3,15 @@ import Logo from '@/components/Logo.vue';
 import Mark from '@/components/Mark.vue';
 import PiggyBank from '@/icons/PiggyBank.vue';
 import SoundCloud from '@/icons/SoundCloud.vue';
-import InteracLogo from '../components/InteracLogo.vue';
+import InteracLogo from '@/components/InteracLogo.vue';
 </script>
 
 <template>
     <section class="w-full h-screen flex items-center justify-center bg-main/40 text-white relative">
-        <header class="absolute top-0 left-0 z-50 sm:flex items-center px-16 py-8 hidden gap-16">
-            <RouterLink to="/" class="hover:opacity-40 transition-opacity duration-300">
+        <header class="absolute top-0 left-0 z-50 flex items-center px-16 py-8 gap-16">
+            <div class="hover:opacity-40 transition-opacity duration-300">
                 <Mark class="w-16 h-16 text-white animate-spin-slow" />
-            </RouterLink>
+            </div>
             <template>
                 <RouterLink to="/" class="hover:opacity-40 transition-opacity duration-300">
                     <p class="text-xl border-b-2 border-white/0 hover:border-white/60 pb-2 transition-all duration-300 !border-white">Home</p>
