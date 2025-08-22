@@ -9,6 +9,8 @@ import HomeSection from '@/sections/HomeSection.vue';
 import LinksSection from '@/sections/LinksSection.vue';
 import AboutSection from '@/sections/AboutSection.vue';
 import InteracLogo from '@/components/InteracLogo.vue';
+import InteracEmblem from '@/components/InteracEmblem.vue';
+import InteracEmblemTwo from '@/components/InteracEmblemTwo.vue';
 
 
 const isLoading = ref(true);
@@ -78,36 +80,75 @@ const showAdultLinks = ref(true);
         <img src="/assets/pictures/bullet-hole.png" alt="" class="w-48 h-48 sm:w-64 sm:h-64">
     </div>
     
-    <footer class="fixed bottom-0 left-0 z-50 w-full items-center sm:justify-start sm:px-16 py-8 flex justify-center">
-        <a href="https://soundcloud.com/kingdemarkio" class="flex group items-center gap-4 sm:gap-8 px-8 py-2 rounded-full bg-white/20 hover:bg-white/95 border border-white/20 text-white backdrop-blur-3xl hover:text-main drop-shadow-2xl hover:scale-110 hover:drop-shadow-black transition-all duration-300">
-            <SoundCloud class="w-8 h-8 sm:w-16 sm:h-16 drop-shadow" />
-            <div class="drop-shadow">
-                <p class="sm:block hidden text-xl font-bold">SoundCloud</p>
-                <p class="text-sm">@kingdemarkio</p>
+    <header v-if="false" class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-4 hidden">
+        <div class="flex items-center bg-black/40 rounded-lg backdrop-blur-xl pl-0.5">
+            <InteracLogo class="w-14 h-14" />
+            <div class="text-center text-white px-8 py-2">
+                <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
+                <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
             </div>
-        </a>
-    </footer>
+        </div>
+    </header>
     
-    <main>
-        <HeroSection v-if="!introDone" />
-        <HomeSection v-else />
-        
-        <LinksSection />
-        
-        <AboutSection ref="aboutSectionRef" />
-
-        <section class="block sm:hidden">
-            <div class="flex items-center gap-8 bg-black/40 border-y border-black backdrop-blur-xl px-4 py-2">
-                <InteracLogo class="w-14 h-14" />
-                <div class="text-center text-white py-2">
-                    <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
-                    <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
-                </div>
+    <Transition
+        enter-active-class="transform transition ease-out duration-300 delay-300"
+        enter-from-class="translate-x-full opacity-0"
+        enter-to-class="translate-x-0 opacity-100"
+        leave-active-class="transform transition ease-in duration-200"
+        leave-from-class="translate-x-0 opacity-100"
+        leave-to-class="translate-x-full opacity-0"
+    >
+    <header v-if="!isLoading" class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-4 hidden">
+        <div class="flex items-center bg-[#fdb913] text-[#231f20] rounded-lg px-4 py-1 gap-8 shadow-2xl shadow-black/60">
+            <InteracEmblemTwo class="w-14 h-14" />
+            <div class="text-center">
+                <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
+                <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-40 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
             </div>
-        </section>
+        </div>
+    </header>
+</Transition>
 
-        <footer class="p-16 drop-shadow-2xl sm:pb-16 pb-64">
-            <p class="text-center">&copy; Copyright {{ new Date().getFullYear() }}, Jonas Markus Gudelis from Cornwall Ontario Canada.</p>
-        </footer>        
-    </main>
+<footer class="fixed bottom-0 left-0 z-50 w-full items-center sm:justify-start sm:px-16 py-8 flex justify-center">
+    <a href="https://soundcloud.com/kingdemarkio" class="flex group items-center gap-4 sm:gap-8 px-8 py-2 rounded-full bg-white/20 hover:bg-white/95 border border-white/20 text-white backdrop-blur-3xl hover:text-main drop-shadow-2xl hover:scale-110 hover:drop-shadow-black transition-all duration-300">
+        <SoundCloud class="w-8 h-8 sm:w-16 sm:h-16 drop-shadow" />
+        <div class="drop-shadow">
+            <p class="sm:block hidden text-xl font-bold">SoundCloud</p>
+            <p class="text-sm">@kingdemarkio</p>
+        </div>
+    </a>
+</footer>
+
+<main>
+    <HeroSection v-if="!introDone" />
+    <HomeSection v-else />
+    
+    <LinksSection />
+    
+    <AboutSection ref="aboutSectionRef" />
+    
+    <section v-if="false" class="block sm:hidden">
+        <div class="flex items-center gap-8 bg-black/40 border-y border-black backdrop-blur-xl px-4 py-2">
+            <InteracLogo class="w-14 h-14" />
+            <div class="text-center text-white py-2">
+                <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
+                <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="block sm:hidden">
+        <div class="flex items-center bg-[#fdb913] text-[#231f20] px-4 py-1 gap-8 shadow-2xl shadow-black/60">
+            <InteracEmblemTwo class="w-14 h-14" />
+            <div class="text-center">
+                <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
+                <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-40 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="p-16 drop-shadow-2xl sm:pb-16 pb-48">
+        <p class="text-center">&copy; Copyright {{ new Date().getFullYear() }}, Jonas Markus Gudelis from Cornwall Ontario Canada.</p>
+    </footer>        
+</main>
 </template>

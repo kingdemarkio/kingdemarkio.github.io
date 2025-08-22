@@ -27,15 +27,7 @@ import InteracLogo from '@/components/InteracLogo.vue';
                 </RouterLink>
             </template>
         </header>
-        <header class="fixed top-0 right-0 z-50 sm:flex items-center justify-between px-16 py-8 hidden">
-            <div class="flex items-center bg-black/40 rounded-lg backdrop-blur-xl pl-0.5">
-                <InteracLogo class="w-14 h-14" />
-                <div class="text-center text-white px-8 py-2">
-                    <p class="text-xs font-light uppercase">Email Messages and e-Transfer Donations</p>
-                    <p class="text-lg lowercase"><a href="mailto: kingdemarkio@gmail.com" class="hover:opacity-60 transition-opacity duration-300">kingdemarkio@gmail.com</a></p>
-                </div>
-            </div>
-        </header>
+        
         
         <footer class="fixed bottom-0 left-0 z-50 w-full items-center sm:justify-start sm:px-16 py-8 flex justify-center">
             <a href="https://soundcloud.com/kingdemarkio" class="flex group items-center gap-4 sm:gap-8 px-8 py-2 rounded-full bg-white/20 hover:bg-white/95 border border-white/20 text-white backdrop-blur-3xl hover:text-main drop-shadow-2xl hover:scale-110 hover:drop-shadow-black transition-all duration-300">
