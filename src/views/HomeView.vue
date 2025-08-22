@@ -74,7 +74,7 @@ const showAdultLinks = ref(true);
         <Smilie class="w-64 h-64 animate-spin" />
     </div>
     
-    <div class="z-[101] fixed top-0 left-0 w-full h-screen flex items-start sm:items-center justify-end pointer-events-none sm:p-32 p-4">
+    <div class="z-[99] fixed top-0 left-0 w-full h-screen flex items-start sm:items-center justify-end pointer-events-none sm:p-32 p-4">
         <img src="/assets/pictures/bullet-hole.png" alt="" class="w-48 h-48 sm:w-64 sm:h-64">
     </div>
     
