@@ -1,5 +1,15 @@
 <script setup>
+import { onMounted } from 'vue'
 
+onMounted(() => {
+  // Disable browser’s scroll restoration
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual'
+  }
+
+  // Always scroll to very top on load
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+})
 </script>
 
 <template>
